@@ -1,0 +1,36 @@
+// :root {
+//   --color-primary: #000000;
+//   --color-secondary: #ffffff;
+//   --color-accent: #ff9900;
+
+//   --text-primary: #ffffff;
+//   --text-secondary: #000000;
+
+//   --font-main: 'Montserrat';
+// }
+
+$color-primary: #ffffff;
+$color-secondary: #000000;
+$color-accent: #ff9900;
+
+$color-primary-hover: #f3f3f3;
+
+$text-primary: #000000;
+$text-secondary: #ffffff;
+
+$shadow-color: transparentize($color-secondary, 0.3);
+
+$font-main: 'Montserrat';
+
+$transition-default: 300ms ease-in-out;
+
+$breakpoints: (
+  mobile-small: 575px,
+  mobile: 767px,
+  tablet: 1023px,
+  small-desktop: 1279px,
+  desktop: 1439px,
+  large-desktop: 1719px
+);
+
+$responsive-ios: 812px;

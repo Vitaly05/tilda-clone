@@ -1,0 +1,17 @@
+@import 'fonts';
+@import 'variables';
+@import 'functions';
+@import 'mixins';
+@import 'overrides';
+
+// Global components
+@import 'components/global/buttons/text-button.scss';
+@import 'components/global/dropdown/dropdown.scss';
+@import 'components/global/dropdown/dropdown-button-item.scss';
+
+// Sections components
+@import 'components/sections/header-page/header-page.scss';
+@import 'components/sections/header-page/navigation-link.scss';
+@import 'components/sections/my-projects-view/projects-header.scss';
+@import 'components/sections/my-projects-view/projects-list.scss';
+@import 'components/sections//my-projects-view/projects-list/project-card.scss';

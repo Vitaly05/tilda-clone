@@ -1,0 +1,30 @@
+.dropdown {
+  position: relative;
+}
+
+.dropdown__toggle {
+  padding: 0;
+
+  background-color: transparent;
+  border: none;
+}
+
+.dropdown__items {
+  position: absolute;
+  top: 100%;
+  right: 0;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  display: none;
+
+  background-color: $color-primary;
+  box-shadow: 0 0 10px $shadow-color;
+
+  overflow: hidden;
+}
+
+.dropdown__items--show {
+  display: block;
+}

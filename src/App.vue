@@ -11,7 +11,3 @@ export default {
 <template>
   <RouterView />
 </template>
-
-<style scoped>
-
-</style>

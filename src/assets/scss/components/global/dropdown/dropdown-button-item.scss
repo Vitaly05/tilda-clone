@@ -1,0 +1,18 @@
+.dropdown__button {
+  cursor: pointer;
+
+  padding: 10px;
+
+  width: 100%;
+
+  border: none;
+  background-color: transparent;
+
+  text-align: start;
+
+  transition: background-color $transition-default;
+
+  @include hover {
+    background-color: $color-primary-hover;
+  }
+}

@@ -1,0 +1,39 @@
+.button {
+  cursor: pointer;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  background-color: transparent;
+  border: none;
+
+  font-weight: 700;
+
+  transition: color $transition-default;
+
+  @include hover {
+    color: $color-accent;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+
+    color: $color-accent;
+  }
+}
+
+.button--primary {
+  color: $text-primary;
+}
+
+.button--secondary {
+  color: $text-secondary;
+}

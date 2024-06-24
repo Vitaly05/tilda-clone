@@ -6,6 +6,6 @@ export default {
 
 <template>
   <main>
-    Home
+    Project page preview
   </main>
 </template>

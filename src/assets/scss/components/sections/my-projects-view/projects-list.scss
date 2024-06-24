@@ -1,0 +1,25 @@
+.projects__list {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 70%;
+
+  @include breakpoint-down(tablet) {
+    grid-template-columns: 1fr;
+  }
+
+  @include breakpoint-down(mobile) {
+    width: 95%;
+  }
+}
+
+.projects__empty-list-text {
+  margin-top: 40px;
+
+  text-align: center;
+}

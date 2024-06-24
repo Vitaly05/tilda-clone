@@ -9,7 +9,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'my projects',
+      name: 'my-projects',
       component: MyProjects
     },
     {
@@ -19,12 +19,12 @@ const router = createRouter({
     },
     {
       path: '/project/:id/edit/page',
-      name: 'project page editor',
+      name: 'project-page-editor',
       component: ProjectPageEditorView
     },
     {
       path: '/project/:id/preview/page',
-      name: 'project page preview',
+      name: 'project-page-preview',
       component: ProjectPagePreviewView
     }
   ]

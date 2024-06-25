@@ -13,3 +13,7 @@
 a {
   text-decoration: none;
 }
+
+body:has(.modal--open) {
+  overflow-y: hidden;
+}

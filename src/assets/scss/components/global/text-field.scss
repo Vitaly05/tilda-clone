@@ -1,0 +1,39 @@
+.text-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  label {
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  input {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    border: none;
+    outline: 0;
+    border-bottom: 1px solid $color-secondary;
+
+    font-size: 18px;
+
+    transition:
+      border-color $transition-default,
+      background-color $transition-default 1000s;
+
+    @include hover {
+      border-color: $color-accent;
+    }
+  }
+
+  &:has(.text-field__error) {
+    input {
+      border-color: $color-error;
+    }
+  }
+}
+
+.text-field__error {
+  color: $color-error;
+}

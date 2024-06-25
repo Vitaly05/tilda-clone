@@ -1,0 +1,24 @@
+.button--filled {
+  background-color: $color-accent;
+
+  transition-property: background-color, color;
+  transition: $transition-default;
+
+  @include hover {
+    background-color: transparentize($color-accent, 0.2);
+    &,
+    svg {
+      color: $color-primary;
+    }
+  }
+
+  svg {
+    color: $color-secondary;
+
+    transition: color $transition-default;
+  }
+}
+
+.button--rounded {
+  border-radius: 20px;
+}

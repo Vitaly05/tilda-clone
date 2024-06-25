@@ -1,13 +1,15 @@
 <template>
   <main>
     <ProjectHeader @addNewPage="addPage" />
-    <PagesList :pages="pages" @remove="removePage" />
+    <PagesList :pages="getPages($route.params.id)" @remove="removePage" />
   </main>
 </template>
 
 <script>
 import ProjectHeader from '@/components/sections/project-view/ProjectHeader.vue'
 import PagesList from '@/components/sections/project-view/PagesList.vue'
+import { usePagesStore } from '@/stores/pages.js'
+import { mapState, mapActions } from 'pinia'
 
 export default {
   components: {
@@ -16,25 +18,19 @@ export default {
   },
   data() {
     return {
-      pages: [
-        {
-          name: 'Page',
-          imageSrc: '/src/assets/images/page-card/page-1.jpg'
-        },
-        {
-          name: 'Page'
-        }
-      ]
+      projectId: this.$route.params.id
     }
   },
+  computed: {
+    ...mapState(usePagesStore, ['getPages'])
+  },
   methods: {
+    ...mapActions(usePagesStore, ['add', 'remove']),
     addPage() {
-      this.pages.push({
-        name: 'Page'
-      })
+      this.add('Page', this.projectId)
     },
-    removePage(index) {
-      this.pages.splice(index, 1)
+    removePage(id) {
+      this.remove(id, this.projectId)
     }
   }
 }

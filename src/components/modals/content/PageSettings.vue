@@ -6,6 +6,7 @@
         <template #Главное>
           <div class="page-settings__main">
             <TextField
+              v-model="page.name"
               label="Заголовок"
               id="page-settings__name-field"
               type="text"
@@ -28,18 +29,31 @@
         <template #Бейджик>
           <div class="page-settings__badge">
             <div class="badge__title">Изображение бейджика</div>
-            <TextField
-              label="Изображение"
-              id="page-settings__image-url-field"
-              type="url"
-              placeholder="Ссылка на изображение"
-            />
+            <div class="page-settings__badge-search">
+              <TextField
+                v-model="searchImageQuery"
+                label="Поиск изображения"
+                id="page-settings__image-url-field"
+                type="url"
+                placeholder="Поиск"
+              />
+              <RoundedButton @click="findImage"> Найти </RoundedButton>
+            </div>
+            <div class="page-settings__images">
+              <img
+                v-for="url in imagesUrls"
+                :key="url"
+                :src="url"
+                @click="() => setImage(url)"
+                :class="{ 'page-settings__image--active': url === page.imageSrc }"
+              />
+            </div>
           </div>
         </template>
       </TabMenu>
     </div>
     <div class="modal__actions">
-      <RoundedButton @click="close"> Сохранить </RoundedButton>
+      <RoundedButton @click="updatePage"> Сохранить </RoundedButton>
     </div>
   </div>
 </template>
@@ -49,7 +63,10 @@ import TabMenu from '@/components/global/TabMenu.vue'
 import TextField from '@/components/global/TextField.vue'
 import RoundedButton from '@/components/global/buttons/RoundedButton.vue'
 import { useModalStore } from '@/stores/modal.js'
-import { mapActions } from 'pinia'
+import { usePagesStore } from '@/stores/pages.js'
+import { useProjectsStore } from '@/stores/projects.js'
+import { mapActions, mapState } from 'pinia'
+import { searchImage } from '@/api/unsplash.js'
 
 export default {
   components: {
@@ -57,8 +74,47 @@ export default {
     TextField,
     RoundedButton
   },
+  computed: {
+    ...mapState(useProjectsStore, { projectId: 'currentId' }),
+    ...mapState(usePagesStore, ['getCurrentPage', 'currentId']),
+    currentPage() {
+      return this.getCurrentPage(this.projectId).name
+    }
+  },
+  data() {
+    return {
+      page: {
+        name: '',
+        imageSrc: ''
+      },
+      searchImageQuery: '',
+      imagesUrls: []
+    }
+  },
+  watch: {
+    currentId: {
+      handler(newName, oldName) {
+        this.page = JSON.parse(JSON.stringify(this.getCurrentPage(this.projectId)))
+      },
+      immediate: true
+    }
+  },
   methods: {
-    ...mapActions(useModalStore, ['close'])
+    ...mapActions(useModalStore, ['close']),
+    ...mapActions(usePagesStore, ['update']),
+    updatePage() {
+      console.log(this.page)
+      if (this.page.name) {
+        this.update(this.currentId, this.projectId, this.page)
+        this.close()
+      }
+    },
+    setImage(src) {
+      this.page.imageSrc = src
+    },
+    async findImage() {
+      this.imagesUrls = await searchImage(this.searchImageQuery)
+    }
   }
 }
 </script>

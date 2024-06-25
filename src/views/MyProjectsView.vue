@@ -1,44 +1,28 @@
 <template>
   <main>
     <ProjectsHeader @addNew="addNewProject" />
-    <ProjectsList :projects="projects" @removeCard="removeCard" @toggleDropDown="toggleDropDown" />
+    <ProjectsList :projects="projects" @removeCard="remove" @toggleDropDown="toggleDropDown" />
   </main>
 </template>
 
 <script>
 import ProjectsHeader from '@/components/sections/my-projects-view/ProjectsHeader.vue'
 import ProjectsList from '@/components/sections/my-projects-view/ProjectsList.vue'
+import { useProjectsStore } from '@/stores/projects.js'
+import { mapState, mapActions } from 'pinia'
 
 export default {
   components: {
     ProjectsHeader,
     ProjectsList
   },
-  data() {
-    return {
-      projects: [
-        { name: 'My project', dropDownShow: false },
-        { name: 'My project', dropDownShow: false },
-        { name: 'My project', dropDownShow: false },
-        { name: 'My project', dropDownShow: false }
-      ]
-    }
+  computed: {
+    ...mapState(useProjectsStore, ['projects'])
   },
   methods: {
+    ...mapActions(useProjectsStore, ['add', 'remove', 'toggleDropDown']),
     addNewProject() {
-      this.projects.push({ name: 'My project', dropDownShow: false })
-    },
-    removeCard(index) {
-      this.projects.splice(index, 1)
-      console.log(`Removed project with index = ${index}`)
-    },
-    toggleDropDown(index) {
-      const show = !this.projects[index].dropDownShow
-      this.hideAllDropDowns()
-      this.projects[index].dropDownShow = show
-    },
-    hideAllDropDowns() {
-      this.projects.forEach((project) => (project.dropDownShow = false))
+      this.add('Project')
     }
   },
   mounted() {

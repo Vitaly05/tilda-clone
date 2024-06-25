@@ -3,8 +3,8 @@
     <ProjectCard
       v-for="(project, index) in projects"
       :key="index"
-      :title="`${project.name} ${index + 1}`"
-      :id="index"
+      :title="`${project.name} ${index}`"
+      :id="parseInt(index)"
       :dropDownShow="project.dropDownShow"
       @remove="(index) => $emit('removeCard', index)"
       @toggleDropDown="$emit('toggleDropDown', index)"
@@ -22,7 +22,7 @@ export default {
   },
   props: {
     projects: {
-      type: Array,
+      type: Object,
       required: true
     }
   },

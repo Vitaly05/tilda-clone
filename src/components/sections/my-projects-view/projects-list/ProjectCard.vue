@@ -35,6 +35,8 @@ import IconOpen from '@/components/icons/IconOpen.vue'
 import Dropdown from '@/components/global/dropdown/DropDown.vue'
 import DropDownButtonItem from '@/components/global/dropdown/DropDownButtonItem.vue'
 import { RouterLink } from 'vue-router'
+import { useProjectsStore } from '@/stores/projects.js'
+import { mapState, mapActions } from 'pinia'
 
 export default {
   components: {
@@ -62,8 +64,10 @@ export default {
   },
   emits: ['remove', 'toggleDropDown'],
   methods: {
+    ...mapActions(useProjectsStore, ['setCurrentId']),
     goToProjectPage() {
-      this.$router.push(`/project/${this.id + 1}`)
+      this.setCurrentId(this.id)
+      this.$router.push(`/project/${this.id}`)
     }
   }
 }

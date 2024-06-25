@@ -27,6 +27,7 @@ import TextButton from '@/components/global/buttons/TextButton.vue'
 import IconSettings from '@/components/icons/IconSettings.vue'
 import IconTrash from '@/components/icons/IconTrash.vue'
 import { useModalStore } from '@/stores/modal.js'
+import { usePagesStore } from '@/stores/pages.js'
 import { mapActions } from 'pinia'
 import PageSettings from '@/components/modals/content/PageSettings.vue'
 
@@ -46,14 +47,15 @@ export default {
       required: true
     },
     imageSrc: {
-      type: String,
-      required: true
+      type: String
     }
   },
   emits: ['remove'],
   methods: {
     ...mapActions(useModalStore, ['open']),
+    ...mapActions(usePagesStore, ['setCurrentId']),
     openSettingsModal() {
+      this.setCurrentId(this.id)
       this.open(PageSettings)
     }
   }

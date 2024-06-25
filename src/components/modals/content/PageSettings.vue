@@ -38,10 +38,11 @@
                 id="page-settings__image-url-field"
                 type="url"
                 placeholder="Поиск"
+                @keyup.enter="findImage"
               />
               <RoundedButton @click="findImage"> Найти </RoundedButton>
             </div>
-            <div class="page-settings__images">
+            <div v-if="imagesUrls.length !== 0" class="page-settings__images">
               <img
                 v-for="url in imagesUrls"
                 :key="url"
@@ -50,6 +51,10 @@
                 :class="{ 'page-settings__image--active': url === page.imageSrc }"
               />
             </div>
+            <div v-else class="page-settings__images-empty-text">Изображений не найдено</div>
+            <RoundedButton class="page-settings__remove-image-button" @click="removeImage">
+              Удалить бейджик
+            </RoundedButton>
           </div>
         </template>
       </TabMenu>
@@ -118,6 +123,9 @@ export default {
     },
     setImage(src) {
       this.page.imageSrc = src
+    },
+    removeImage() {
+      this.page.imageSrc = ''
     },
     async findImage() {
       this.imagesUrls = await searchImage(this.searchImageQuery)

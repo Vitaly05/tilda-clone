@@ -49,3 +49,16 @@
 .page-settings__image--active {
   box-shadow: 0 0 0 2px $color-secondary;
 }
+
+.page-settings__remove-image-button {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-settings__images-empty-text {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  text-align: center;
+}

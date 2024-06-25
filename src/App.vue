@@ -1,13 +1,16 @@
 <script>
 import { RouterView } from 'vue-router'
+import HeaderApp from '@/components/sections/HeaderApp.vue'
 
 export default {
   components: {
-    RouterView
+    RouterView,
+    HeaderApp
   }
 }
 </script>
 
 <template>
+  <HeaderApp />
   <RouterView />
 </template>

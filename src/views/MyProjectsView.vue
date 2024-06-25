@@ -1,12 +1,9 @@
 <script>
-import HeaderPage from '@/components/sections/HeaderPage.vue'
 import ProjectsHeader from '@/components/sections/my-projects-view/ProjectsHeader.vue'
 import ProjectsList from '@/components/sections/my-projects-view/ProjectsList.vue'
-import { nextTick } from 'vue'
 
 export default {
   components: {
-    HeaderPage,
     ProjectsHeader,
     ProjectsList
   },
@@ -48,7 +45,6 @@ export default {
 
 <template>
   <main>
-    <HeaderPage />
     <ProjectsHeader @addNew="addNewProject" />
     <ProjectsList :projects="projects" @removeCard="removeCard" @toggleDropDown="toggleDropDown" />
   </main>

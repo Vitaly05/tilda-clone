@@ -1,14 +1,8 @@
 <script>
-import HeaderPage from '@/components/sections/HeaderPage.vue'
-
-export default {
-  components: {
-    HeaderPage
-  }
-}
+export default {}
 </script>
 
 <template>
-  <HeaderPage />
-  <main>Project {{ $route.params.id }}</main>
+  <!-- <main>Project {{ $route.params.id }}</main> -->
+  <main></main>
 </template>

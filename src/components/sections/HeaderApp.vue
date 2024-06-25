@@ -1,17 +1,3 @@
-<script>
-import IconTilda from '@/components/icons/IconTilda.vue'
-import TextButton from '@/components/global/buttons/TextButton.vue'
-import { RouterLink } from 'vue-router'
-
-export default {
-  components: {
-    RouterLink,
-    IconTilda,
-    TextButton
-  }
-}
-</script>
-
 <template>
   <header class="header">
     <div class="header__wrap">
@@ -28,3 +14,17 @@ export default {
     </div>
   </header>
 </template>
+
+<script>
+import IconTilda from '@/components/icons/IconTilda.vue'
+import TextButton from '@/components/global/buttons/TextButton.vue'
+import { RouterLink } from 'vue-router'
+
+export default {
+  components: {
+    RouterLink,
+    IconTilda,
+    TextButton
+  }
+}
+</script>

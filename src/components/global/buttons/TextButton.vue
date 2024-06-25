@@ -1,3 +1,9 @@
+<template>
+  <button @click="$emit('click')" class="button" :class="buttonClass">
+    <slot />
+  </button>
+</template>
+
 <script>
 export default {
   props: {
@@ -20,9 +26,3 @@ export default {
   }
 }
 </script>
-
-<template>
-  <button @click="$emit('click')" class="button" :class="buttonClass">
-    <slot />
-  </button>
-</template>

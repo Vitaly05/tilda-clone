@@ -1,11 +1,7 @@
-<script>
-export default {
-  
-}
-</script>
-
 <template>
-  <main>
-    Project page preview
-  </main>
+  <main>Project page preview</main>
 </template>
+
+<script>
+export default {}
+</script>

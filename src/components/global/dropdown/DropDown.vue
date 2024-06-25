@@ -1,3 +1,14 @@
+<template>
+  <div class="dropdown">
+    <button @click.stop="$emit('toggle')" class="dropdown__toggle">
+      <slot />
+    </button>
+    <div class="dropdown__items" :class="{ 'dropdown__items--show': show }">
+      <slot name="items" />
+    </div>
+  </div>
+</template>
+
 <script>
 export default {
   props: {
@@ -9,14 +20,3 @@ export default {
   emits: ['toggle']
 }
 </script>
-
-<template>
-  <div class="dropdown">
-    <button @click.stop="$emit('toggle')" class="dropdown__toggle">
-      <slot />
-    </button>
-    <div class="dropdown__items" :class="{ 'dropdown__items--show': show }">
-      <slot name="items" />
-    </div>
-  </div>
-</template>

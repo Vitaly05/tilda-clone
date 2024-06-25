@@ -1,3 +1,10 @@
+<template>
+  <main>
+    <ProjectsHeader @addNew="addNewProject" />
+    <ProjectsList :projects="projects" @removeCard="removeCard" @toggleDropDown="toggleDropDown" />
+  </main>
+</template>
+
 <script>
 import ProjectsHeader from '@/components/sections/my-projects-view/ProjectsHeader.vue'
 import ProjectsList from '@/components/sections/my-projects-view/ProjectsList.vue'
@@ -42,10 +49,3 @@ export default {
   }
 }
 </script>
-
-<template>
-  <main>
-    <ProjectsHeader @addNew="addNewProject" />
-    <ProjectsList :projects="projects" @removeCard="removeCard" @toggleDropDown="toggleDropDown" />
-  </main>
-</template>

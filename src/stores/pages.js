@@ -52,7 +52,7 @@ export const usePagesStore = defineStore('pages', {
       delete this.allPages[projectId].pages[id]
     },
     update(id, projectId, pageData) {
-      this.allPages[projectId].pages[id] = pageData
+      this.allPages[projectId].pages[id] = JSON.parse(JSON.stringify(pageData))
     },
     setCurrentId(id) {
       this.currentId = id

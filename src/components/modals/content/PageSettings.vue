@@ -93,7 +93,7 @@ export default {
   },
   watch: {
     currentId: {
-      handler(newName, oldName) {
+      handler(newId, oldId) {
         this.page = JSON.parse(JSON.stringify(this.getCurrentPage(this.projectId)))
       },
       immediate: true
@@ -103,7 +103,6 @@ export default {
     ...mapActions(useModalStore, ['close']),
     ...mapActions(usePagesStore, ['update']),
     updatePage() {
-      console.log(this.page)
       if (this.page.name) {
         this.update(this.currentId, this.projectId, this.page)
         this.close()

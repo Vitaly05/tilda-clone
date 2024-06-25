@@ -24,7 +24,7 @@ export default {
   },
   props: {
     pages: {
-      type: Array,
+      type: Object,
       required: true
     }
   },

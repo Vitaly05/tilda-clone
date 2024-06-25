@@ -11,6 +11,8 @@
               id="page-settings__name-field"
               type="text"
               placeholder="Заголовок страницы"
+              :errorMessage="errors.name"
+              :isError="!!errors.name"
             />
             <TextField
               label="Описание"
@@ -88,7 +90,10 @@ export default {
         imageSrc: ''
       },
       searchImageQuery: '',
-      imagesUrls: []
+      imagesUrls: [],
+      errors: {
+        name: ''
+      }
     }
   },
   watch: {
@@ -103,9 +108,12 @@ export default {
     ...mapActions(useModalStore, ['close']),
     ...mapActions(usePagesStore, ['update']),
     updatePage() {
-      if (this.page.name) {
+      if (this.validateMainForm()) {
         this.update(this.currentId, this.projectId, this.page)
         this.close()
+        this.clearErrors()
+      } else {
+        this.errors.name = 'Ведите заголовок'
       }
     },
     setImage(src) {
@@ -113,6 +121,14 @@ export default {
     },
     async findImage() {
       this.imagesUrls = await searchImage(this.searchImageQuery)
+    },
+    validateMainForm() {
+      return !!this.page.name
+    },
+    clearErrors() {
+      Object.keys(this.errors).forEach((field) => {
+        this.errors[field] = ''
+      })
     }
   }
 }

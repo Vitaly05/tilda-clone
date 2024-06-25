@@ -1,7 +1,7 @@
 <template>
   <main>
     <ProjectHeader @addNewPage="addPage" />
-    <PagesList :pages="getPages($route.params.id)" @remove="removePage" />
+    <PagesList :pages="getPages(projectId)" @remove="removePage" />
   </main>
 </template>
 
@@ -9,6 +9,7 @@
 import ProjectHeader from '@/components/sections/project-view/ProjectHeader.vue'
 import PagesList from '@/components/sections/project-view/PagesList.vue'
 import { usePagesStore } from '@/stores/pages.js'
+import { useProjectsStore } from '@/stores/projects.js'
 import { mapState, mapActions } from 'pinia'
 
 export default {
@@ -25,6 +26,7 @@ export default {
     ...mapState(usePagesStore, ['getPages'])
   },
   methods: {
+    ...mapActions(useProjectsStore, ['setCurrentId']),
     ...mapActions(usePagesStore, ['add', 'remove']),
     addPage() {
       this.add('Page', this.projectId)
@@ -32,6 +34,9 @@ export default {
     removePage(id) {
       this.remove(id, this.projectId)
     }
+  },
+  mounted() {
+    this.setCurrentId(this.projectId)
   }
 }
 </script>

@@ -6,8 +6,6 @@
       :title="`${project.name} ${index}`"
       :id="parseInt(index)"
       :dropDownShow="project.dropDownShow"
-      @remove="(index) => $emit('removeCard', index)"
-      @toggleDropDown="$emit('toggleDropDown', index)"
     />
   </div>
   <div v-else class="projects__empty-list-text">Нет ни одного проекта</div>
@@ -25,7 +23,6 @@ export default {
       type: Object,
       required: true
     }
-  },
-  emits: ['removeCard', 'toggleDropDown']
+  }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <main>
     <ProjectHeader @addNewPage="addPage" />
-    <PagesList :pages="getPages(projectId)" @remove="removePage" />
+    <PagesList :pages="getPages(projectId)" />
   </main>
 </template>
 
@@ -30,9 +30,6 @@ export default {
     ...mapActions(usePagesStore, ['add', 'remove']),
     addPage() {
       this.add('Page', this.projectId)
-    },
-    removePage(id) {
-      this.remove(id, this.projectId)
     }
   },
   mounted() {

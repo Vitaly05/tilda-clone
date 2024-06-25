@@ -9,7 +9,6 @@
         :name="`${page.name}`"
         :id="parseInt(index)"
         :imageSrc="page.imageSrc"
-        @remove="(id) => $emit('remove', id)"
       />
     </div>
   </div>
@@ -27,7 +26,6 @@ export default {
       type: Object,
       required: true
     }
-  },
-  emits: ['remove']
+  }
 }
 </script>

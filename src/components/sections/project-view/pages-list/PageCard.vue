@@ -14,7 +14,7 @@
         <IconSettings />
         Настройки
       </TextButton>
-      <TextButton @click="$emit('remove', id)">
+      <TextButton @click="() => remove(id, projectId)">
         <IconTrash />
         Удалить
       </TextButton>
@@ -28,7 +28,8 @@ import IconSettings from '@/components/icons/IconSettings.vue'
 import IconTrash from '@/components/icons/IconTrash.vue'
 import { useModalStore } from '@/stores/modal.js'
 import { usePagesStore } from '@/stores/pages.js'
-import { mapActions } from 'pinia'
+import { useProjectsStore } from '@/stores/projects.js'
+import { mapActions, mapState } from 'pinia'
 import PageSettings from '@/components/modals/content/PageSettings.vue'
 
 export default {
@@ -50,10 +51,12 @@ export default {
       type: String
     }
   },
-  emits: ['remove'],
+  computed: {
+    ...mapState(useProjectsStore, { projectId: 'currentId' })
+  },
   methods: {
     ...mapActions(useModalStore, ['open']),
-    ...mapActions(usePagesStore, ['setCurrentId']),
+    ...mapActions(usePagesStore, ['setCurrentId', 'remove']),
     openSettingsModal() {
       this.setCurrentId(this.id)
       this.open(PageSettings)

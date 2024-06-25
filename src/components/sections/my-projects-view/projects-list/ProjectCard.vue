@@ -2,7 +2,7 @@
   <button class="project-card" @click.self="goToProjectPage">
     <div class="project-card__title">{{ title }}</div>
     <div class="project-card__more-container">
-      <Dropdown :show="dropDownShow" @toggle="$emit('toggleDropDown')">
+      <Dropdown :show="dropDownShow" @toggle="() => toggleDropDown(id)">
         <div class="project-card__more-button">
           <IconMore />
         </div>
@@ -10,7 +10,7 @@
           <DropDownButtonItem @click="() => console.log('Rename')">
             Переименовать
           </DropDownButtonItem>
-          <DropDownButtonItem @click="$emit('remove', id)"> Удалить сайт </DropDownButtonItem>
+          <DropDownButtonItem @click="() => remove(id)"> Удалить сайт </DropDownButtonItem>
         </template>
       </Dropdown>
     </div>
@@ -62,11 +62,13 @@ export default {
       required: true
     }
   },
-  emits: ['remove', 'toggleDropDown'],
+  emits: ['toggleDropDown'],
+  computed: {
+    ...mapState(useProjectsStore, ['currentId'])
+  },
   methods: {
-    ...mapActions(useProjectsStore, ['setCurrentId']),
+    ...mapActions(useProjectsStore, ['setCurrentId', 'remove', 'toggleDropDown']),
     goToProjectPage() {
-      this.setCurrentId(this.id)
       this.$router.push(`/project/${this.id}`)
     }
   }

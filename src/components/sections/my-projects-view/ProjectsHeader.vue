@@ -1,7 +1,7 @@
 <template>
   <div class="projects__header">
     <div class="projects__header-text">Мои сайты:</div>
-    <TextButton @click="$emit('addNew')">
+    <TextButton @click="() => add('My project')">
       <IconAdd />
       Создать новый сайт
     </TextButton>
@@ -11,12 +11,16 @@
 <script>
 import TextButton from '@/components/global/buttons/TextButton.vue'
 import IconAdd from '@/components/icons/IconAdd.vue'
+import { useProjectsStore } from '@/stores/projects'
+import { mapActions } from 'pinia'
 
 export default {
   components: {
     TextButton,
     IconAdd
   },
-  emits: ['addNew']
+  methods: {
+    ...mapActions(useProjectsStore, ['add'])
+  }
 }
 </script>

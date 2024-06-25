@@ -1,7 +1,7 @@
 <template>
   <main>
-    <ProjectsHeader @addNew="addNewProject" />
-    <ProjectsList :projects="projects" @removeCard="remove" @toggleDropDown="toggleDropDown" />
+    <ProjectsHeader />
+    <ProjectsList :projects="projects" />
   </main>
 </template>
 
@@ -20,10 +20,7 @@ export default {
     ...mapState(useProjectsStore, ['projects'])
   },
   methods: {
-    ...mapActions(useProjectsStore, ['add', 'remove', 'toggleDropDown']),
-    addNewProject() {
-      this.add('Project')
-    }
+    ...mapActions(useProjectsStore, ['hideAllDropDowns'])
   },
   mounted() {
     document.addEventListener('click', this.hideAllDropDowns)

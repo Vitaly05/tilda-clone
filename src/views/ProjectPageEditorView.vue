@@ -3,11 +3,7 @@
     <PageEditorHeader />
     <div class="page-editor__blocks-wrap">
       <TransitionGroup name="blocks">
-        <PageBlock
-          v-for="(block, index) in getBlocks(projectId, pageId)"
-          :key="index"
-          :block="block"
-        />
+        <PageBlock v-for="block in getBlocks(projectId, pageId)" :key="block.id" :block="block" />
       </TransitionGroup>
     </div>
     <RoundedButton class="page-editor__insert-block" @click="openBlockSideMenu">

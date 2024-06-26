@@ -1,6 +1,6 @@
 <template>
   <div class="block-side-menu" :class="{ 'block-side-menu--open': isOpen }">
-    <div class="block-side-menu__backdrop" @click="closeSideMenu"></div>
+    <div class="block-side-menu__backdrop" @click="closeMenu"></div>
     <div class="block-side-menu__content">
       <div class="block-side-menu__library">
         <div class="block-side-menu__search-panel">
@@ -8,7 +8,7 @@
           <TextButton>
             <IconSearch />
           </TextButton>
-          <TextButton @click="closeSideMenu">
+          <TextButton @click="closeMenu">
             <IconClose />
           </TextButton>
         </div>
@@ -68,12 +68,16 @@ export default {
   computed: {
     ...mapState(useProjectsStore, { projectId: 'currentId' }),
     ...mapState(usePagesStore, { pageId: 'currentId' }),
-    ...mapState(useBlocksStore, { isOpen: 'sideMenuIsOpen' })
+    ...mapState(useBlocksStore, { isOpen: 'sideMenuIsOpen', beforeBlockId: 'beforeBlockId' })
   },
   methods: {
-    ...mapActions(useBlocksStore, ['add', 'closeSideMenu']),
+    ...mapActions(useBlocksStore, ['add', 'closeSideMenu', 'setBeforeBlockId']),
+    closeMenu() {
+      this.setBeforeBlockId(undefined)
+      this.closeSideMenu()
+    },
     addTextBlock() {
-      this.add(this.projectId, this.pageId, {
+      this.addBlock({
         type: 'text',
         text: 'default text'
       })
@@ -86,7 +90,7 @@ export default {
       })
     },
     addBlock(pageData) {
-      this.add(this.projectId, this.pageId, pageData)
+      this.add(this.projectId, this.pageId, pageData, this.beforeBlockId)
     }
   }
 }

@@ -9,7 +9,7 @@
     <div class="page-block__block-actions">
       <TextButton> <IconToTop /> </TextButton>
       <TextButton @click="cloneBlock"> <IconDuplicate /> </TextButton>
-      <TextButton> <IconTrash /> </TextButton>
+      <TextButton @click="removeBlock"> <IconTrash /> </TextButton>
       <TextButton> <IconToBottom /> </TextButton>
     </div>
   </div>
@@ -53,13 +53,16 @@ export default {
     ...mapState(usePagesStore, { pageId: 'currentId' })
   },
   methods: {
-    ...mapActions(useBlocksStore, ['setBeforeBlockId', 'openSideMenu', 'duplicate']),
+    ...mapActions(useBlocksStore, ['setBeforeBlockId', 'openSideMenu', 'duplicate', 'remove']),
     openBlockSideMenu() {
       this.setBeforeBlockId(this.block.id)
       this.openSideMenu()
     },
     cloneBlock() {
       this.duplicate(this.projectId, this.pageId, this.block.id)
+    },
+    removeBlock() {
+      this.remove(this.projectId, this.pageId, this.block.id)
     }
   }
 }

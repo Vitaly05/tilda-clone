@@ -56,6 +56,11 @@ export const useBlocksStore = defineStore('blocks', {
       const currentBlockIndex = currentBlocks.findIndex((block) => block.id === blockId)
       currentBlocks[currentBlockIndex] = JSON.parse(JSON.stringify(blockData))
     },
+    remove(projectId, pageId, blockId) {
+      const currentBlocks = this.allBlocks[projectId][pageId].blocks
+      const index = currentBlocks.findIndex((block) => block.id === blockId)
+      currentBlocks.splice(index, 1)
+    },
     duplicate(projectId, pageId, blockId) {
       const currentBlocks = this.allBlocks[projectId][pageId]
       const index = currentBlocks.blocks.findIndex((block) => block.id === blockId)

@@ -7,10 +7,10 @@
       <IconAdd />
     </RoundedButton>
     <div class="page-block__block-actions">
-      <TextButton> <IconToTop /> </TextButton>
+      <TextButton @click="moveBlockUp"> <IconToTop /> </TextButton>
       <TextButton @click="cloneBlock"> <IconDuplicate /> </TextButton>
       <TextButton @click="removeBlock"> <IconTrash /> </TextButton>
-      <TextButton> <IconToBottom /> </TextButton>
+      <TextButton @click="moveBlockDown"> <IconToBottom /> </TextButton>
     </div>
   </div>
 </template>
@@ -53,7 +53,14 @@ export default {
     ...mapState(usePagesStore, { pageId: 'currentId' })
   },
   methods: {
-    ...mapActions(useBlocksStore, ['setBeforeBlockId', 'openSideMenu', 'duplicate', 'remove']),
+    ...mapActions(useBlocksStore, [
+      'setBeforeBlockId',
+      'openSideMenu',
+      'duplicate',
+      'remove',
+      'moveUp',
+      'moveDown'
+    ]),
     openBlockSideMenu() {
       this.setBeforeBlockId(this.block.id)
       this.openSideMenu()
@@ -63,6 +70,12 @@ export default {
     },
     removeBlock() {
       this.remove(this.projectId, this.pageId, this.block.id)
+    },
+    moveBlockUp() {
+      this.moveUp(this.projectId, this.pageId, this.block.id)
+    },
+    moveBlockDown() {
+      this.moveDown(this.projectId, this.pageId, this.block.id)
     }
   }
 }

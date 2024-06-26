@@ -70,6 +70,26 @@ export const useBlocksStore = defineStore('blocks', {
         id: currentBlocks.nextIndex++
       })
     },
+    moveUp(projectId, pageId, blockId) {
+      const currentBlocks = this.allBlocks[projectId][pageId].blocks
+      const index = currentBlocks.findIndex((block) => block.id === blockId)
+      if (index > 0) {
+        ;[currentBlocks[index - 1], currentBlocks[index]] = [
+          currentBlocks[index],
+          currentBlocks[index - 1]
+        ]
+      }
+    },
+    moveDown(projectId, pageId, blockId) {
+      const currentBlocks = this.allBlocks[projectId][pageId].blocks
+      const index = currentBlocks.findIndex((block) => block.id === blockId)
+      if (index < currentBlocks.length - 1) {
+        ;[currentBlocks[index + 1], currentBlocks[index]] = [
+          currentBlocks[index],
+          currentBlocks[index + 1]
+        ]
+      }
+    },
     openSideMenu() {
       this.sideMenuIsOpen = true
     },

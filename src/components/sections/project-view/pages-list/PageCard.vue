@@ -7,7 +7,11 @@
       <div class="page-card__logo">
         <img v-if="imageSrc" :src="imageSrc" alt="page logo" />
       </div>
-      <div class="page-card__name">{{ name }}</div>
+      <div class="page-card__info">
+        <div class="page-card__name">{{ name }}</div>
+        <div class="page-card__description">Описание: {{ description || '-' }}</div>
+        <div class="page-card__address">Адрес: {{ address || '-' }}</div>
+      </div>
     </router-link>
     <div class="page-card__right-container">
       <TextButton @click="openSettingsModal">
@@ -49,7 +53,9 @@ export default {
     },
     imageSrc: {
       type: String
-    }
+    },
+    description: String,
+    address: String
   },
   computed: {
     ...mapState(useProjectsStore, { projectId: 'currentId' })

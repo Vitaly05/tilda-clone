@@ -7,6 +7,8 @@
         v-for="(page, index) in pages"
         :key="index"
         :name="`${page.name}`"
+        :description="page.description"
+        :address="page.address"
         :id="parseInt(index)"
         :imageSrc="page.imageSrc"
       />

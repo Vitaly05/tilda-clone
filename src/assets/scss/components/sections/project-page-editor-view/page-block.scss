@@ -1,0 +1,15 @@
+.page-block {
+  width: 100%;
+
+  background-color: $color-primary-hover;
+}
+
+.page-block__editable-text {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  outline: none;
+
+  font-size: 30px;
+  text-align: center;
+}

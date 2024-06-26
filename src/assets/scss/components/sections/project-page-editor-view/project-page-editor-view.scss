@@ -1,0 +1,19 @@
+.page-editor__wrap {
+  padding-bottom: 40px;
+  width: 100%;
+}
+
+.page-editor__insert-block {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+
+.blocks-enter-active,
+.blocks-leave-active {
+  transition: opacity $transition-default;
+}
+.blocks-enter-from,
+.blocks-leave-to {
+  opacity: 0;
+}

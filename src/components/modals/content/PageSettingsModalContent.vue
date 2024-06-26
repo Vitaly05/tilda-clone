@@ -15,12 +15,14 @@
               :isError="!!errors.name"
             />
             <TextField
+              v-model="page.description"
               label="Описание"
               id="page-settings__description-field"
               type="text"
               placeholder="Описание страницы"
             />
             <TextField
+              v-model="page.address"
               label="Адрес страницы"
               id="page-settings__url-field"
               type="text"
@@ -68,7 +70,9 @@ export default {
     return {
       page: {
         name: '',
-        imageSrc: ''
+        imageSrc: '',
+        description: '',
+        address: ''
       },
       searchImageQuery: '',
       imagesUrls: [],

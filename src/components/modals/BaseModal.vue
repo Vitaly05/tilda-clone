@@ -1,8 +1,12 @@
 <template>
-  <div class="modal" :class="{ 'modal--open': isOpen }">
-    <div class="modal__backdrop" @click="close"></div>
+  <div v-for="(modal, index) in openedModals" class="modal modal--open">
+    <div
+      class="modal__backdrop"
+      :class="{ 'modal__backdrop--first': index === 0 }"
+      @click="close"
+    ></div>
     <div class="modal__content-wrap">
-      <component :is="content"></component>
+      <component :is="modal"></component>
     </div>
   </div>
 </template>
@@ -13,7 +17,7 @@ import { mapState, mapActions } from 'pinia'
 
 export default {
   computed: {
-    ...mapState(useModalStore, ['isOpen', 'content'])
+    ...mapState(useModalStore, ['openedModals'])
   },
   methods: {
     ...mapActions(useModalStore, ['close'])

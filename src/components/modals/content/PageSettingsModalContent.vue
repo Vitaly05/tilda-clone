@@ -30,30 +30,8 @@
         </template>
         <template #Бейджик>
           <div class="page-settings__badge">
-            <div class="badge__title">Изображение бейджика</div>
-            <div class="page-settings__badge-search">
-              <TextField
-                v-model="searchImageQuery"
-                label="Поиск изображения"
-                id="page-settings__image-url-field"
-                type="url"
-                placeholder="Поиск"
-                @keyup.enter="findImage"
-              />
-              <RoundedButton @click="findImage"> Найти </RoundedButton>
-            </div>
-            <div v-if="imagesUrls.length !== 0" class="page-settings__images">
-              <img
-                v-for="url in imagesUrls"
-                :key="url"
-                :src="url"
-                @click="() => setImage(url)"
-                :class="{ 'page-settings__image--active': url === page.imageSrc }"
-              />
-            </div>
-            <div v-else class="page-settings__images-empty-text">Изображений не найдено</div>
-            <RoundedButton class="page-settings__remove-image-button" @click="removeImage">
-              Удалить бейджик
+            <RoundedButton class="page-settings__open-image-modal" @click="openImageModal">
+              Выбрать изображение
             </RoundedButton>
           </div>
         </template>
@@ -69,11 +47,11 @@
 import TabMenu from '@/components/global/TabMenu.vue'
 import TextField from '@/components/global/TextField.vue'
 import RoundedButton from '@/components/global/buttons/RoundedButton.vue'
+import ImageSelectorModalContent from './ImageSelectorModalContent.vue'
 import { useModalStore } from '@/stores/modal.js'
 import { usePagesStore } from '@/stores/pages.js'
 import { useProjectsStore } from '@/stores/projects.js'
 import { mapActions, mapState } from 'pinia'
-import { searchImage } from '@/api/unsplash.js'
 
 export default {
   components: {
@@ -84,9 +62,7 @@ export default {
   computed: {
     ...mapState(useProjectsStore, { projectId: 'currentId' }),
     ...mapState(usePagesStore, ['getCurrentPage', 'currentId']),
-    currentPage() {
-      return this.getCurrentPage(this.projectId).name
-    }
+    ...mapState(useModalStore, ['selectedImageSrc'])
   },
   data() {
     return {
@@ -107,10 +83,13 @@ export default {
         this.page = JSON.parse(JSON.stringify(this.getCurrentPage(this.projectId)))
       },
       immediate: true
+    },
+    selectedImageSrc(newSrc, oldSrc) {
+      this.page.imageSrc = newSrc
     }
   },
   methods: {
-    ...mapActions(useModalStore, ['close']),
+    ...mapActions(useModalStore, ['close', 'open', 'setSelectedImageSrc']),
     ...mapActions(usePagesStore, ['update']),
     updatePage() {
       if (this.validateMainForm()) {
@@ -121,14 +100,9 @@ export default {
         this.errors.name = 'Ведите заголовок'
       }
     },
-    setImage(src) {
-      this.page.imageSrc = src
-    },
-    removeImage() {
-      this.page.imageSrc = ''
-    },
-    async findImage() {
-      this.imagesUrls = await searchImage(this.searchImageQuery)
+    openImageModal() {
+      this.setSelectedImageSrc(this.page.imageSrc)
+      this.open(ImageSelectorModalContent)
     },
     validateMainForm() {
       return !!this.page.name

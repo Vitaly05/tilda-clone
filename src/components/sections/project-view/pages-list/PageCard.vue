@@ -30,7 +30,7 @@ import { useModalStore } from '@/stores/modal.js'
 import { usePagesStore } from '@/stores/pages.js'
 import { useProjectsStore } from '@/stores/projects.js'
 import { mapActions, mapState } from 'pinia'
-import PageSettings from '@/components/modals/content/PageSettings.vue'
+import PageSettingsModalContent from '@/components/modals/content/PageSettingsModalContent.vue'
 
 export default {
   components: {
@@ -59,7 +59,7 @@ export default {
     ...mapActions(usePagesStore, ['setCurrentId', 'remove']),
     openSettingsModal() {
       this.setCurrentId(this.id)
-      this.open(PageSettings)
+      this.open(PageSettingsModalContent)
     }
   }
 }

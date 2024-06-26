@@ -2,17 +2,19 @@ import { defineStore } from 'pinia'
 
 export const useModalStore = defineStore('modal', {
   state: () => ({
-    isOpen: false,
     // TODO: type, remove content
-    content: undefined
+    selectedImageSrc: '',
+    openedModals: []
   }),
   actions: {
     open(content) {
-      this.content = content
-      this.isOpen = true
+      this.openedModals.push(content)
     },
     close() {
-      this.isOpen = false
+      this.openedModals.pop()
+    },
+    setSelectedImageSrc(src) {
+      this.selectedImageSrc = src
     }
   }
 })

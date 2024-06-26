@@ -30,7 +30,7 @@ import IconOpen from '@/components/icons/IconOpen.vue'
 import IconAdd from '@/components/icons/IconAdd.vue'
 import { useModalStore } from '@/stores/modal.js'
 import { mapActions } from 'pinia'
-import ProjectDomain from '@/components/modals/content/ProjectDomain.vue'
+import ProjectDomainModalContent from '@/components/modals/content/ProjectDomainModalContent.vue'
 
 export default {
   components: {
@@ -44,7 +44,7 @@ export default {
   methods: {
     ...mapActions(useModalStore, ['open']),
     openDomainModal() {
-      this.open(ProjectDomain)
+      this.open(ProjectDomainModalContent)
     }
   }
 }

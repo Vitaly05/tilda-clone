@@ -9,11 +9,17 @@
   margin-top: 40px;
 }
 
+.blocks-move,
 .blocks-enter-active,
 .blocks-leave-active {
-  transition: opacity $transition-default;
+  transition: all $transition-default;
 }
+
 .blocks-enter-from,
 .blocks-leave-to {
   opacity: 0;
+}
+
+.blocks-leave-active {
+  position: absolute;
 }

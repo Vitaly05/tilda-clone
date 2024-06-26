@@ -1,0 +1,22 @@
+.editor-header {
+  padding: 20px;
+
+  display: flex;
+  width: 100%;
+
+  background-color: $color-primary;
+  border-bottom: 2px solid $color-accent;
+}
+
+.editor-header__right-container {
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.editor-header__page-name {
+  font-size: 30px;
+  font-weight: 700;
+}

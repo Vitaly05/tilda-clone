@@ -1,5 +1,6 @@
 <template>
   <main class="page-editor__wrap">
+    <PageEditorHeader />
     <div class="page-editor__blocks-wrap">
       <TransitionGroup name="blocks">
         <PageBlock
@@ -22,6 +23,7 @@ import PageBlock from '@/components/sections/project-page-editor-view/PageBlock.
 import RoundedButton from '@/components/global/buttons/RoundedButton.vue'
 import IconAdd from '@/components/icons/IconAdd.vue'
 import BlockSideMenu from '@/components/sections/project-page-editor-view/BlockSideMenu.vue'
+import PageEditorHeader from '@/components/sections/project-page-editor-view/PageEditorHeader.vue'
 import { useProjectsStore } from '@/stores/projects'
 import { usePagesStore } from '@/stores/pages'
 import { useBlocksStore } from '@/stores/blocks'
@@ -32,7 +34,8 @@ export default {
     PageBlock,
     RoundedButton,
     IconAdd,
-    BlockSideMenu
+    BlockSideMenu,
+    PageEditorHeader
   },
   computed: {
     ...mapState(useProjectsStore, { projectId: 'currentId' }),

@@ -17,7 +17,8 @@ export const useBlocksStore = defineStore('blocks', {
       }
     },
     sideMenuIsOpen: false,
-    beforeBlockId: undefined
+    beforeBlockId: undefined,
+    currentId: undefined
   }),
   getters: {
     getBlocks() {
@@ -32,6 +33,16 @@ export const useBlocksStore = defineStore('blocks', {
           }
         }
         return this.allBlocks[projectId][pageId].blocks
+      }
+    },
+    getCurrentBlock() {
+      return (projectId, pageId) => {
+        if (this.currentId !== undefined) {
+          return this.allBlocks[projectId][pageId].blocks.find(
+            (block) => block.id === this.currentId
+          )
+        }
+        return undefined
       }
     }
   },
@@ -55,6 +66,16 @@ export const useBlocksStore = defineStore('blocks', {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
       const currentBlockIndex = currentBlocks.findIndex((block) => block.id === blockId)
       currentBlocks[currentBlockIndex] = JSON.parse(JSON.stringify(blockData))
+    },
+    updateText(projectId, pageId, blockId, newText) {
+      const currentBlocks = this.allBlocks[projectId][pageId].blocks
+      const currentBlockIndex = currentBlocks.findIndex((block) => block.id === blockId)
+      currentBlocks[currentBlockIndex].text = newText
+    },
+    updateImage(projectId, pageId, blockId, newSrc) {
+      const currentBlocks = this.allBlocks[projectId][pageId].blocks
+      const currentBlockIndex = currentBlocks.findIndex((block) => block.id === blockId)
+      currentBlocks[currentBlockIndex].imageSrc = newSrc
     },
     remove(projectId, pageId, blockId) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
@@ -98,6 +119,9 @@ export const useBlocksStore = defineStore('blocks', {
     },
     setBeforeBlockId(id) {
       this.beforeBlockId = id
+    },
+    setCurrentId(id) {
+      this.currentId = id
     }
   }
 })

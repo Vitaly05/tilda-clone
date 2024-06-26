@@ -2,7 +2,9 @@
   <div class="page-block">
     <TextBlock v-if="block.type === 'text'" :block="block" />
     <ImageTextBlock v-if="block.type === 'image-text'" :block="block" />
-    <RoundedButton class="page-block__edit-content-button"> Контент </RoundedButton>
+    <RoundedButton class="page-block__edit-content-button" @click="openEditBlockModal">
+      Контент
+    </RoundedButton>
     <RoundedButton class="page-block__add-block-button" @click="openBlockSideMenu">
       <IconAdd />
     </RoundedButton>
@@ -25,10 +27,13 @@ import IconToTop from '@/components/icons/IconToTop.vue'
 import IconDuplicate from '@/components/icons/IconDuplicate.vue'
 import IconTrash from '@/components/icons/IconTrash.vue'
 import IconToBottom from '@/components/icons/IconToBottom.vue'
+import TextBlockSettingsModalContent from '@/components/modals/content/TextBlockSettingsModalContent.vue'
+import { useModalStore } from '@/stores/modal'
 import { useBlocksStore } from '@/stores/blocks'
 import { useProjectsStore } from '@/stores/projects'
 import { usePagesStore } from '@/stores/pages'
 import { mapActions, mapState } from 'pinia'
+import ImageTextBlockSettingsModalContent from '@/components/modals/content/ImageTextBlockSettingsModalContent.vue'
 
 export default {
   components: {
@@ -59,8 +64,10 @@ export default {
       'duplicate',
       'remove',
       'moveUp',
-      'moveDown'
+      'moveDown',
+      'setCurrentId'
     ]),
+    ...mapActions(useModalStore, { openModal: 'open' }),
     openBlockSideMenu() {
       this.setBeforeBlockId(this.block.id)
       this.openSideMenu()
@@ -76,6 +83,18 @@ export default {
     },
     moveBlockDown() {
       this.moveDown(this.projectId, this.pageId, this.block.id)
+    },
+    openEditBlockModal() {
+      this.setCurrentId(this.block.id)
+      switch (this.block.type) {
+        case 'text':
+          this.openModal(TextBlockSettingsModalContent)
+          break
+        case 'image-text': {
+          this.openModal(ImageTextBlockSettingsModalContent)
+          break
+        }
+      }
     }
   }
 }

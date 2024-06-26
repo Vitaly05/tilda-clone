@@ -2,7 +2,7 @@
   <div
     class="page-block__editable-text"
     contenteditable
-    @keyup="updateText($event.target.innerText)"
+    @keyup="updateBlockText($event.target.innerText)"
   >
     {{ block?.text }}
   </div>
@@ -26,12 +26,9 @@ export default {
     ...mapState(usePagesStore, { pageId: 'currentId' })
   },
   methods: {
-    ...mapActions(useBlocksStore, ['update']),
-    updateText(newText) {
-      this.update(this.projectId, this.pageId, this.block.id, {
-        ...this.block,
-        text: newText
-      })
+    ...mapActions(useBlocksStore, ['updateText']),
+    updateBlockText(newText) {
+      this.updateText(this.projectId, this.pageId, this.block.id, newText)
     }
   }
 }

@@ -56,7 +56,15 @@ export const useBlocksStore = defineStore('blocks', {
       const currentBlockIndex = currentBlocks.findIndex((block) => block.id === blockId)
       currentBlocks[currentBlockIndex] = JSON.parse(JSON.stringify(blockData))
     },
-    duplicate(projectId, pageId, blockId) {},
+    duplicate(projectId, pageId, blockId) {
+      const currentBlocks = this.allBlocks[projectId][pageId]
+      const index = currentBlocks.blocks.findIndex((block) => block.id === blockId)
+
+      currentBlocks.blocks.splice(index + 1, 0, {
+        ...JSON.parse(JSON.stringify(currentBlocks.blocks[index])),
+        id: currentBlocks.nextIndex++
+      })
+    },
     openSideMenu() {
       this.sideMenuIsOpen = true
     },

@@ -8,7 +8,7 @@
     </RoundedButton>
     <div class="page-block__block-actions">
       <TextButton> <IconToTop /> </TextButton>
-      <TextButton> <IconDuplicate /> </TextButton>
+      <TextButton @click="cloneBlock"> <IconDuplicate /> </TextButton>
       <TextButton> <IconTrash /> </TextButton>
       <TextButton> <IconToBottom /> </TextButton>
     </div>
@@ -26,7 +26,9 @@ import IconDuplicate from '@/components/icons/IconDuplicate.vue'
 import IconTrash from '@/components/icons/IconTrash.vue'
 import IconToBottom from '@/components/icons/IconToBottom.vue'
 import { useBlocksStore } from '@/stores/blocks'
-import { mapActions } from 'pinia'
+import { useProjectsStore } from '@/stores/projects'
+import { usePagesStore } from '@/stores/pages'
+import { mapActions, mapState } from 'pinia'
 
 export default {
   components: {
@@ -46,11 +48,18 @@ export default {
       required: true
     }
   },
+  computed: {
+    ...mapState(useProjectsStore, { projectId: 'currentId' }),
+    ...mapState(usePagesStore, { pageId: 'currentId' })
+  },
   methods: {
-    ...mapActions(useBlocksStore, ['setBeforeBlockId', 'openSideMenu']),
+    ...mapActions(useBlocksStore, ['setBeforeBlockId', 'openSideMenu', 'duplicate']),
     openBlockSideMenu() {
       this.setBeforeBlockId(this.block.id)
       this.openSideMenu()
+    },
+    cloneBlock() {
+      this.duplicate(this.projectId, this.pageId, this.block.id)
     }
   }
 }

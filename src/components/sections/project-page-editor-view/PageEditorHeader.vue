@@ -1,7 +1,7 @@
 <template>
   <header class="editor-header">
     <div class="editor-header__left-container">
-      <div class="editor-header__page-name">{{ getCurrentPage(projectId).name }}</div>
+      <div class="editor-header__page-name">{{ getCurrentPage(projectId)?.name }}</div>
     </div>
     <div class="editor-header__right-container">
       <TextButton> Предпросмотр </TextButton>

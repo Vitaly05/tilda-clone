@@ -2,6 +2,7 @@
   position: relative;
 
   width: 100%;
+  max-width: 100%;
 
   background-color: $color-primary-hover;
 
@@ -15,8 +16,9 @@
 }
 
 .page-block__editable-text {
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding: 40px;
+
+  max-width: 100%;
 
   outline: none;
 

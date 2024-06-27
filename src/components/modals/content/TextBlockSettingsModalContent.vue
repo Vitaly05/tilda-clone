@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import TextField from '@/components/global/TextField.vue'
 import RoundedButton from '@/components/global/buttons/RoundedButton.vue'
 import EditableText from '@/components/sections/project-page-editor-view/block-elements/EditableText.vue'
 import { useModalStore } from '@/stores/modal.js'
@@ -25,7 +24,6 @@ import { usePagesStore } from '@/stores/pages'
 
 export default {
   components: {
-    TextField,
     RoundedButton,
     EditableText
   },

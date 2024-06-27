@@ -1,5 +1,5 @@
 <template>
-  <div v-for="(modal, index) in openedModals" class="modal modal--open">
+  <div v-for="(modal, index) in openedModals" :key="index" class="modal modal--open">
     <div v-show="index === openedModals.length - 1" class="modal__backdrop" @click="close"></div>
     <div class="modal__content-wrap">
       <component :is="modal"></component>

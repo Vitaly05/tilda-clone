@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import TextField from '@/components/global/TextField.vue'
 import RoundedButton from '@/components/global/buttons/RoundedButton.vue'
 import EditableText from '@/components/sections/project-page-editor-view/block-elements/EditableText.vue'
 import { useModalStore } from '@/stores/modal.js'
@@ -29,7 +28,6 @@ import ImageSelectorModalContent from './ImageSelectorModalContent.vue'
 
 export default {
   components: {
-    TextField,
     RoundedButton,
     EditableText
   },

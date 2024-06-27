@@ -34,7 +34,6 @@ import IconEdit from '@/components/icons/IconEdit.vue'
 import IconOpen from '@/components/icons/IconOpen.vue'
 import Dropdown from '@/components/global/dropdown/DropDown.vue'
 import DropDownButtonItem from '@/components/global/dropdown/DropDownButtonItem.vue'
-import { RouterLink } from 'vue-router'
 import { useProjectsStore } from '@/stores/projects.js'
 import { mapState, mapActions } from 'pinia'
 
@@ -45,8 +44,7 @@ export default {
     IconEdit,
     IconOpen,
     Dropdown,
-    DropDownButtonItem,
-    RouterLink
+    DropDownButtonItem
   },
   props: {
     title: {

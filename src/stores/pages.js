@@ -30,15 +30,16 @@ export const usePagesStore = defineStore('pages', {
     allPages: storedPages
   }),
   getters: {
-    getPages() {
+    getPages: (state) => {
       return (projectId) => {
-        if (!this.allPages[projectId]) {
-          this.allPages[projectId] = {
+        let projectPages = state.allPages[projectId]
+        if (!projectPages) {
+          projectPages = {
             nextId: 1,
             pages: {}
           }
         }
-        return this.allPages[projectId].pages
+        return projectPages.pages
       }
     },
     getCurrentPage() {

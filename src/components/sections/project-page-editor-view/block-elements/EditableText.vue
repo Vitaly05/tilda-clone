@@ -2,7 +2,7 @@
   <div
     class="page-block__editable-text"
     contenteditable
-    @keyup="updateBlockText($event.target.innerText)"
+    @blur="updateBlockText($event.target.innerText)"
   >
     {{ block?.text }}
   </div>

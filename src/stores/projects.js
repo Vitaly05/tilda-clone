@@ -1,15 +1,31 @@
+import { getObject, setObject } from '@/helpers/localStorage'
 import { defineStore } from 'pinia'
+
+const defaultProjects = {
+  1: { name: 'My project', dropDownShow: false },
+  2: { name: 'My project', dropDownShow: false },
+  3: { name: 'My project', dropDownShow: false },
+  4: { name: 'My project', dropDownShow: false }
+}
+const defaultNextId = 5
+
+let storedProjects = getObject('projects')
+if (!storedProjects) {
+  storedProjects = defaultProjects
+  saveProjects(defaultProjects)
+}
+
+let storedNextId = localStorage.getItem('projectsNextId')
+if (!storedNextId) {
+  storedNextId = defaultNextId
+  saveProjectsNextId(defaultNextId)
+}
 
 export const useProjectsStore = defineStore('projects', {
   state: () => ({
     currentId: 1,
-    nextId: 5,
-    projects: {
-      1: { name: 'My project', dropDownShow: false },
-      2: { name: 'My project', dropDownShow: false },
-      3: { name: 'My project', dropDownShow: false },
-      4: { name: 'My project', dropDownShow: false }
-    }
+    nextId: storedNextId,
+    projects: storedProjects
   }),
   actions: {
     add(name) {
@@ -17,9 +33,12 @@ export const useProjectsStore = defineStore('projects', {
         name: name,
         dropDownShow: false
       }
+      saveProjects(this.projects)
+      saveProjectsNextId(this.nextId)
     },
     remove(id) {
       delete this.projects[id]
+      saveProjects(this.projects)
     },
     toggleDropDown(id) {
       const show = !this.projects[id].dropDownShow
@@ -34,3 +53,11 @@ export const useProjectsStore = defineStore('projects', {
     }
   }
 })
+
+function saveProjects(projects) {
+  setObject('projects', projects)
+}
+
+function saveProjectsNextId(id) {
+  localStorage.setItem('projectsNextId', id)
+}

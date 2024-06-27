@@ -1,21 +1,30 @@
+import { getObject, setObject } from '@/helpers/localStorage'
 import { defineStore } from 'pinia'
+
+const defaultBlocks = {
+  1: {
+    1: {
+      nextIndex: 2,
+      blocks: [
+        {
+          id: 1,
+          type: 'text',
+          text: 'Default text'
+        }
+      ]
+    }
+  }
+}
+
+let storedBlocks = getObject('allBlocks')
+if (!storedBlocks) {
+  storedBlocks = defaultBlocks
+  saveBlocks(defaultBlocks)
+}
 
 export const useBlocksStore = defineStore('blocks', {
   state: () => ({
-    allBlocks: {
-      1: {
-        1: {
-          nextIndex: 2,
-          blocks: [
-            {
-              id: 1,
-              type: 'text',
-              text: 'Default text'
-            }
-          ]
-        }
-      }
-    },
+    allBlocks: storedBlocks,
     sideMenuIsOpen: false,
     beforeBlockId: undefined,
     currentId: undefined
@@ -61,26 +70,31 @@ export const useBlocksStore = defineStore('blocks', {
           id: currentBlocks.nextIndex++
         })
       }
+      saveBlocks(this.allBlocks)
     },
     update(projectId, pageId, blockId, blockData) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
       const currentBlockIndex = currentBlocks.findIndex((block) => block.id === blockId)
       currentBlocks[currentBlockIndex] = JSON.parse(JSON.stringify(blockData))
+      saveBlocks(this.allBlocks)
     },
     updateText(projectId, pageId, blockId, newText) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
       const currentBlockIndex = currentBlocks.findIndex((block) => block.id === blockId)
       currentBlocks[currentBlockIndex].text = newText
+      saveBlocks(this.allBlocks)
     },
     updateImage(projectId, pageId, blockId, newSrc) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
       const currentBlockIndex = currentBlocks.findIndex((block) => block.id === blockId)
       currentBlocks[currentBlockIndex].imageSrc = newSrc
+      saveBlocks(this.allBlocks)
     },
     remove(projectId, pageId, blockId) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
       const index = currentBlocks.findIndex((block) => block.id === blockId)
       currentBlocks.splice(index, 1)
+      saveBlocks(this.allBlocks)
     },
     duplicate(projectId, pageId, blockId) {
       const currentBlocks = this.allBlocks[projectId][pageId]
@@ -90,6 +104,7 @@ export const useBlocksStore = defineStore('blocks', {
         ...JSON.parse(JSON.stringify(currentBlocks.blocks[index])),
         id: currentBlocks.nextIndex++
       })
+      saveBlocks(this.allBlocks)
     },
     moveUp(projectId, pageId, blockId) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
@@ -100,6 +115,7 @@ export const useBlocksStore = defineStore('blocks', {
           currentBlocks[index - 1]
         ]
       }
+      saveBlocks(this.allBlocks)
     },
     moveDown(projectId, pageId, blockId) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
@@ -110,6 +126,7 @@ export const useBlocksStore = defineStore('blocks', {
           currentBlocks[index + 1]
         ]
       }
+      saveBlocks(this.allBlocks)
     },
     openSideMenu() {
       this.sideMenuIsOpen = true
@@ -125,3 +142,7 @@ export const useBlocksStore = defineStore('blocks', {
     }
   }
 })
+
+function saveBlocks(blocks) {
+  setObject('allBlocks', blocks)
+}

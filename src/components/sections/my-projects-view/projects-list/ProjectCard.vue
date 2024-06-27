@@ -62,12 +62,11 @@ export default {
       required: true
     }
   },
-  emits: ['toggleDropDown'],
   computed: {
     ...mapState(useProjectsStore, ['currentId'])
   },
   methods: {
-    ...mapActions(useProjectsStore, ['setCurrentId', 'remove', 'toggleDropDown']),
+    ...mapActions(useProjectsStore, ['remove', 'toggleDropDown']),
     goToProjectPage() {
       this.$router.push(`/project/${this.id}`)
     }

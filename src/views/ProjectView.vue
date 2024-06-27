@@ -17,23 +17,15 @@ export default {
     ProjectHeader,
     PagesList
   },
-  data() {
-    return {
-      projectId: this.$route.params.id
-    }
-  },
   computed: {
+    ...mapState(useProjectsStore, { projectId: 'currentId' }),
     ...mapState(usePagesStore, ['getPages'])
   },
   methods: {
-    ...mapActions(useProjectsStore, ['setCurrentId']),
     ...mapActions(usePagesStore, ['add', 'remove']),
     addPage() {
       this.add('Page', this.projectId)
     }
-  },
-  mounted() {
-    this.setCurrentId(this.projectId)
   }
 }
 </script>

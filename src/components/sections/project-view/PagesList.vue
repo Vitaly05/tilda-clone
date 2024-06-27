@@ -1,6 +1,8 @@
 <template>
   <div class="project__pages-list">
-    <div v-if="Object.keys(pages).length" class="project__pages-title">Страницы сайта:</div>
+    <div v-if="pages && Object.keys(pages).length" class="project__pages-title">
+      Страницы сайта:
+    </div>
     <div v-else class="project__pages-title">Нет ни одной страницы</div>
     <div v-if="pages">
       <PageCard

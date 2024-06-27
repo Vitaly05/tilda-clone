@@ -54,7 +54,6 @@ export default {
   },
   methods: {
     ...mapActions(useModalStore, ['open']),
-    ...mapActions(usePagesStore, { setCurrentPageId: 'setCurrentId' }),
     goToMyProjects() {
       this.$router.push('/')
     },

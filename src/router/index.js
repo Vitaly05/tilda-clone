@@ -5,6 +5,8 @@ import ProjectView from '../views/ProjectView.vue'
 import ProjectPageEditorView from '../views/ProjectPageEditorView.vue'
 import ProjectPagePreviewView from '../views/ProjectPagePreviewView.vue'
 import LoginView from '@/views/LoginView.vue'
+import { useProjectsStore } from '@/stores/projects'
+import { usePagesStore } from '@/stores/pages'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +46,11 @@ router.beforeEach((to, from) => {
   } else if (to.name === 'login' && isAuth) {
     return { name: 'my-projects' }
   }
+
+  const projectsStore = useProjectsStore()
+  projectsStore.setCurrentId(to.params.id || 1)
+  const pagesStore = usePagesStore()
+  pagesStore.setCurrentId(to.params.pageId || 1)
 })
 
 export default router

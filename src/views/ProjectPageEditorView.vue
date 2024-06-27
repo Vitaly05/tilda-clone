@@ -39,14 +39,10 @@ export default {
     ...mapState(useBlocksStore, ['getBlocks'])
   },
   methods: {
-    ...mapActions(usePagesStore, { setCurrentPageId: 'setCurrentId' }),
     ...mapActions(useBlocksStore, ['add', 'openSideMenu']),
     openBlockSideMenu() {
       this.openSideMenu()
     }
-  },
-  mounted() {
-    this.setCurrentPageId(this.$route.params.pageId)
   }
 }
 </script>

@@ -1,0 +1,9 @@
+.images-slider-block__image--draggable {
+  cursor: grab;
+
+  padding: 4px;
+}
+
+.images-slider-block__image--drag-over {
+  background-color: $color-secondary;
+}

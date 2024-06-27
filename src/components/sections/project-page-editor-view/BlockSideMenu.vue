@@ -38,6 +38,10 @@
           <div class="block__title">Блок с текстом и фоновой картинкой</div>
           <div class="block__description">Блок с обложкой и текстом по центру</div>
         </button>
+        <button class="block-side-menu__block" @click="addImagesSliderBlock">
+          <div class="block__title">Блок со слайдером</div>
+          <div class="block__description">Блок со слайдером изображений</div>
+        </button>
       </div>
     </div>
   </div>
@@ -87,6 +91,17 @@ export default {
         type: 'image-text',
         text: 'default image text',
         imageSrc: '/src/assets/images/page-card/page-1.jpg'
+      })
+    },
+    addImagesSliderBlock() {
+      this.addBlock({
+        type: 'images-slider',
+        slideImages: [
+          { src: '/src/assets/images/page-card/page-1.jpg', id: 1 },
+          { src: '/src/assets/images/page-card/page-1.jpg', id: 2 },
+          { src: '/src/assets/images/page-card/page-1.jpg', id: 3 },
+          { src: '/src/assets/images/page-card/page-1.jpg', id: 4 }
+        ]
       })
     },
     addBlock(pageData) {

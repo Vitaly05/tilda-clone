@@ -90,6 +90,12 @@ export const useBlocksStore = defineStore('blocks', {
       currentBlocks[currentBlockIndex].imageSrc = newSrc
       saveBlocks(this.allBlocks)
     },
+    updateImageSlider(projectId, pageId, blockId, imageIndex, newSrc) {
+      const currentBlocks = this.allBlocks[projectId][pageId].blocks
+      const currentBlockIndex = currentBlocks.findIndex((block) => block.id === blockId)
+      currentBlocks[currentBlockIndex].slideImages[imageIndex].src = newSrc
+      saveBlocks(this.allBlocks)
+    },
     remove(projectId, pageId, blockId) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
       const index = currentBlocks.findIndex((block) => block.id === blockId)

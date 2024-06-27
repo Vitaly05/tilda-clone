@@ -2,6 +2,7 @@
   <div class="page-block" :class="{ 'page-block--read-only': readOnly }">
     <TextBlock v-if="block.type === 'text'" :block="block" :readOnly="readOnly" />
     <ImageTextBlock v-if="block.type === 'image-text'" :block="block" :readOnly="readOnly" />
+    <ImagesSliderBlock v-if="block.type === 'images-slider'" :block="block" :readOnly="readOnly" />
     <RoundedButton class="page-block__edit-content-button" @click="openEditBlockModal">
       Контент
     </RoundedButton>
@@ -34,6 +35,7 @@ import { useProjectsStore } from '@/stores/projects'
 import { usePagesStore } from '@/stores/pages'
 import { mapActions, mapState } from 'pinia'
 import ImageTextBlockSettingsModalContent from '@/components/modals/content/ImageTextBlockSettingsModalContent.vue'
+import ImagesSliderBlock from './block-types/ImagesSliderBlock.vue'
 
 export default {
   components: {
@@ -45,7 +47,8 @@ export default {
     IconToTop,
     IconDuplicate,
     IconTrash,
-    IconToBottom
+    IconToBottom,
+    ImagesSliderBlock
   },
   props: {
     block: {

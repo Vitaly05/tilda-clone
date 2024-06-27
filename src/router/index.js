@@ -38,8 +38,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-  if (to.name !== 'login' && !isAuthenticated()) {
+  const isAuth = isAuthenticated()
+  if (to.name !== 'login' && !isAuth) {
     return { name: 'login' }
+  } else if (to.name === 'login' && isAuth) {
+    return { name: 'my-projects' }
   }
 })
 

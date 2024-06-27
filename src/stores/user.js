@@ -1,7 +1,7 @@
 import { removeCookie, setCookie } from '@/helpers/cookie'
 import { defineStore } from 'pinia'
 
-const expires = 1 * 20 * 1000
+const expires = 15 * 60 * 1000
 
 export const useUserStore = defineStore('user', {
   state: () => ({

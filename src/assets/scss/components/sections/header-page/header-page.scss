@@ -4,6 +4,10 @@
   background-color: $color-secondary;
 }
 
+.header--hidden {
+  display: none;
+}
+
 .header__wrap {
   display: flex;
   align-items: center;

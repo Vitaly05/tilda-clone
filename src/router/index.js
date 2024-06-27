@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { getCookie } from '@/helpers/cookie'
 import MyProjects from '../views/MyProjectsView.vue'
 import ProjectView from '../views/ProjectView.vue'
 import ProjectPageEditorView from '../views/ProjectPageEditorView.vue'
 import ProjectPagePreviewView from '../views/ProjectPagePreviewView.vue'
+import LoginView from '@/views/LoginView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,8 +28,23 @@ const router = createRouter({
       path: '/project/:id/preview-page/:pageId',
       name: 'project-page-preview',
       component: ProjectPagePreviewView
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
     }
   ]
 })
 
+router.beforeEach((to, from) => {
+  if (to.name !== 'login' && !isAuthenticated()) {
+    return { name: 'login' }
+  }
+})
+
 export default router
+
+function isAuthenticated() {
+  return !!getCookie('access-token')
+}

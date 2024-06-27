@@ -18,12 +18,12 @@ const router = createRouter({
       component: ProjectView
     },
     {
-      path: '/project/:id/edit/page/:pageId',
+      path: '/project/:id/edit-page/:pageId',
       name: 'project-page-editor',
       component: ProjectPageEditorView
     },
     {
-      path: '/project/:id/preview/page/pageId',
+      path: '/project/:id/preview-page/:pageId',
       name: 'project-page-preview',
       component: ProjectPagePreviewView
     }

@@ -1,7 +1,7 @@
 <template>
-  <div class="page-block">
-    <TextBlock v-if="block.type === 'text'" :block="block" />
-    <ImageTextBlock v-if="block.type === 'image-text'" :block="block" />
+  <div class="page-block" :class="{ 'page-block--read-only': readOnly }">
+    <TextBlock v-if="block.type === 'text'" :block="block" :readOnly="readOnly" />
+    <ImageTextBlock v-if="block.type === 'image-text'" :block="block" :readOnly="readOnly" />
     <RoundedButton class="page-block__edit-content-button" @click="openEditBlockModal">
       Контент
     </RoundedButton>
@@ -51,7 +51,8 @@ export default {
     block: {
       type: Object,
       required: true
-    }
+    },
+    readOnly: Boolean
   },
   computed: {
     ...mapState(useProjectsStore, { projectId: 'currentId' }),

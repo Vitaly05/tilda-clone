@@ -1,5 +1,6 @@
 <template>
-  <EditableText :block="block" />
+  <div v-if="readOnly" class="page-block__text">{{ block?.text }}</div>
+  <EditableText v-else :block="block" />
 </template>
 
 <script>
@@ -13,7 +14,8 @@ export default {
     block: {
       type: Object,
       required: true
-    }
+    },
+    readOnly: Boolean
   }
 }
 </script>

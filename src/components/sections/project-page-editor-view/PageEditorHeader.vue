@@ -4,7 +4,9 @@
       <div class="editor-header__page-name">{{ getCurrentPage(projectId)?.name }}</div>
     </div>
     <div class="editor-header__right-container">
-      <TextButton> Предпросмотр </TextButton>
+      <router-link :to="`/project/${projectId}/preview-page/${pageId}`">
+        <TextButton> Предпросмотр </TextButton>
+      </router-link>
       <DropDown :show="dropDownIsOpen">
         <TextButton @click="dropDownIsOpen = !dropDownIsOpen">
           Еще
@@ -47,6 +49,7 @@ export default {
   },
   computed: {
     ...mapState(useProjectsStore, { projectId: 'currentId' }),
+    ...mapState(usePagesStore, { pageId: 'currentId' }),
     ...mapState(usePagesStore, ['getCurrentPage'])
   },
   methods: {

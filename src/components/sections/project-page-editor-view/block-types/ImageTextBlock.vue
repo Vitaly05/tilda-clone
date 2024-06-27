@@ -1,7 +1,8 @@
 <template>
   <div class="image-text-block">
     <img class="image-text-block__image" :src="block?.imageSrc" />
-    <EditableText class="image-text-block__text" :block="block" />
+    <div v-if="readOnly" class="image-text-block__text">{{ block?.text }}</div>
+    <EditableText v-else class="image-text-block__text" :block="block" />
   </div>
 </template>
 
@@ -16,7 +17,8 @@ export default {
     block: {
       type: Object,
       required: true
-    }
+    },
+    readOnly: Boolean
   }
 }
 </script>

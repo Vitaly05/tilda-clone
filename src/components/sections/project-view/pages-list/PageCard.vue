@@ -2,7 +2,7 @@
   <div class="page-card">
     <router-link
       class="page-card__left-container"
-      :to="`/project/${$route.params.id}/edit/page/${id}`"
+      :to="`/project/${$route.params.id}/edit-page/${id}`"
     >
       <div class="page-card__logo">
         <img v-if="imageSrc" :src="imageSrc" alt="page logo" />

@@ -20,7 +20,6 @@
 
 <script>
 import RoundedButton from '@/components/global/buttons/RoundedButton.vue'
-import EditableText from '@/components/sections/project-page-editor-view/block-elements/EditableText.vue'
 import { useModalStore } from '@/stores/modal.js'
 import { useBlocksStore } from '@/stores/blocks'
 import { useProjectsStore } from '@/stores/projects'
@@ -29,8 +28,7 @@ import { usePagesStore } from '@/stores/pages'
 
 export default {
   components: {
-    RoundedButton,
-    EditableText
+    RoundedButton
   },
   data() {
     return {

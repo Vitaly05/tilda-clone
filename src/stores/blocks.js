@@ -1,5 +1,5 @@
 import { defaultBlocks } from '@/data/defaultBlocks'
-import { getObjectToLocalStorage, setObjectToLocalStorage } from '@/helpers/localStorage'
+import { getObjectFromLocalStorage, setObjectToLocalStorage } from '@/helpers/localStorage'
 import { defineStore } from 'pinia'
 
 function saveBlocks(blocks) {
@@ -18,7 +18,7 @@ function findBlockIndexById(blocks, blockId) {
   return blocks.findIndex((block) => block.id === blockId)
 }
 
-let storedBlocks = getObjectToLocalStorage('allBlocks')
+let storedBlocks = getObjectFromLocalStorage('allBlocks')
 if (!storedBlocks) {
   storedBlocks = defaultBlocks
   saveBlocks(defaultBlocks)

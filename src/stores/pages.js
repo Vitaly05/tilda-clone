@@ -1,12 +1,13 @@
 import { defaultPages } from '@/data/defaultPages'
-import { getObjectToLocalStorage, setObjectToLocalStorage } from '@/helpers/localStorage'
+import { getObjectFromLocalStorage, setObjectToLocalStorage } from '@/helpers/localStorage'
 import { defineStore } from 'pinia'
+import router from '@/router'
 
 function savePages(pages) {
   setObjectToLocalStorage('allPages', pages)
 }
 
-let storedPages = getObjectToLocalStorage('allPages')
+let storedPages = getObjectFromLocalStorage('allPages')
 if (!storedPages) {
   storedPages = defaultPages
   savePages(defaultPages)
@@ -31,7 +32,14 @@ export const usePagesStore = defineStore('pages', {
       }
     },
     getCurrentPage() {
-      return (projectId) => this.allPages[projectId].pages[this.currentId]
+      return (projectId) => {
+        const projectPages = this.allPages[projectId]
+        if (!projectPages) {
+          router.push('/')
+          return
+        }
+        return this.allPages[projectId].pages[this.currentId]
+      }
     }
   },
   actions: {

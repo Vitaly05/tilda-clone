@@ -4,6 +4,7 @@
       <div class="editor-header__page-name">{{ getCurrentPage(projectId)?.name }}</div>
     </div>
     <div class="editor-header__right-container">
+      <TextButton v-if="isAddHistory" @click="removeToHistory"> Отменить </TextButton>
       <router-link :to="`/project/${projectId}/preview-page/${pageId}`">
         <TextButton> Предпросмотр </TextButton>
       </router-link>
@@ -33,6 +34,7 @@ import PageSettingsModalContent from '@/components/modals/content/PageSettingsMo
 import { useModalStore } from '@/stores/modal'
 import { useProjectsStore } from '@/stores/projects'
 import { usePagesStore } from '@/stores/pages'
+import { useBlocksStore } from '@/stores/blocks'
 import { mapActions, mapState } from 'pinia'
 
 export default {
@@ -50,9 +52,11 @@ export default {
   computed: {
     ...mapState(useProjectsStore, { projectId: 'currentId' }),
     ...mapState(usePagesStore, { pageId: 'currentId' }),
-    ...mapState(usePagesStore, ['getCurrentPage'])
+    ...mapState(usePagesStore, ['getCurrentPage']),
+    ...mapState(useBlocksStore, ['isAddHistory']),
   },
   methods: {
+    ...mapActions(useBlocksStore, ['removeToHistory']),
     ...mapActions(useModalStore, ['open']),
     goToMyProjects() {
       this.$router.push('/')

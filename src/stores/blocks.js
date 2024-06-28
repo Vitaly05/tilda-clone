@@ -1,8 +1,8 @@
 import { defaultBlocks } from '@/data/defaultBlocks'
-import { getObject, setObject } from '@/helpers/localStorage'
+import { getObjectToLocalStorage, setObjectToLocalStorage } from '@/helpers/localStorage'
 import { defineStore } from 'pinia'
 
-let storedBlocks = getObject('allBlocks')
+let storedBlocks = getObjectToLocalStorage('allBlocks')
 if (!storedBlocks) {
   storedBlocks = defaultBlocks
   saveBlocks(defaultBlocks)
@@ -130,7 +130,7 @@ export const useBlocksStore = defineStore('blocks', {
 })
 
 function saveBlocks(blocks) {
-  setObject('allBlocks', blocks)
+  setObjectToLocalStorage('allBlocks', blocks)
 }
 
 function cloneObject(obj) {

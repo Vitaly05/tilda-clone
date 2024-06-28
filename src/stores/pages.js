@@ -1,8 +1,8 @@
 import { defaultPages } from '@/data/defaultPages'
-import { getObject, setObject } from '@/helpers/localStorage'
+import { getObjectToLocalStorage, setObjectToLocalStorage } from '@/helpers/localStorage'
 import { defineStore } from 'pinia'
 
-let storedPages = getObject('allPages')
+let storedPages = getObjectToLocalStorage('allPages')
 if (!storedPages) {
   storedPages = defaultPages
   savePages(defaultPages)
@@ -60,5 +60,5 @@ export const usePagesStore = defineStore('pages', {
 })
 
 function savePages(pages) {
-  setObject('allPages', pages)
+  setObjectToLocalStorage('allPages', pages)
 }

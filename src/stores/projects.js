@@ -2,6 +2,14 @@ import { defaultNextProjectId, defaultProjects } from '@/data/defaultProjects'
 import { getObjectToLocalStorage, setObjectToLocalStorage } from '@/helpers/localStorage'
 import { defineStore } from 'pinia'
 
+function saveProjects(projects) {
+  setObjectToLocalStorage('projects', projects)
+}
+
+function saveProjectsNextId(id) {
+  localStorage.setItem('projectsNextId', id)
+}
+
 let storedProjects = getObjectToLocalStorage('projects')
 if (!storedProjects) {
   storedProjects = defaultProjects
@@ -46,11 +54,3 @@ export const useProjectsStore = defineStore('projects', {
     }
   }
 })
-
-function saveProjects(projects) {
-  setObjectToLocalStorage('projects', projects)
-}
-
-function saveProjectsNextId(id) {
-  localStorage.setItem('projectsNextId', id)
-}

@@ -2,6 +2,22 @@ import { defaultBlocks } from '@/data/defaultBlocks'
 import { getObjectToLocalStorage, setObjectToLocalStorage } from '@/helpers/localStorage'
 import { defineStore } from 'pinia'
 
+function saveBlocks(blocks) {
+  setObjectToLocalStorage('allBlocks', blocks)
+}
+
+function cloneObject(obj) {
+  return JSON.parse(JSON.stringify(obj))
+}
+
+function replaceBlocks(blocks, index1, index2) {
+  ;[blocks[index1], blocks[index2]] = [blocks[index2], blocks[index1]]
+}
+
+function findBlockIndexById(blocks, blockId) {
+  return blocks.findIndex((block) => block.id === blockId)
+}
+
 let storedBlocks = getObjectToLocalStorage('allBlocks')
 if (!storedBlocks) {
   storedBlocks = defaultBlocks
@@ -128,19 +144,3 @@ export const useBlocksStore = defineStore('blocks', {
     }
   }
 })
-
-function saveBlocks(blocks) {
-  setObjectToLocalStorage('allBlocks', blocks)
-}
-
-function cloneObject(obj) {
-  return JSON.parse(JSON.stringify(obj))
-}
-
-function replaceBlocks(blocks, index1, index2) {
-  ;[blocks[index1], blocks[index2]] = [blocks[index2], blocks[index1]]
-}
-
-function findBlockIndexById(blocks, blockId) {
-  return blocks.findIndex((block) => block.id === blockId)
-}

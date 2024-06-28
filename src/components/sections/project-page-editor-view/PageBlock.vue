@@ -29,13 +29,13 @@ import IconDuplicate from '@/components/icons/IconDuplicate.vue'
 import IconTrash from '@/components/icons/IconTrash.vue'
 import IconToBottom from '@/components/icons/IconToBottom.vue'
 import TextBlockSettingsModalContent from '@/components/modals/content/TextBlockSettingsModalContent.vue'
+import ImageTextBlockSettingsModalContent from '@/components/modals/content/ImageTextBlockSettingsModalContent.vue'
+import ImagesSliderBlock from './block-types/ImagesSliderBlock.vue'
 import { useModalStore } from '@/stores/modal'
 import { useBlocksStore } from '@/stores/blocks'
 import { useProjectsStore } from '@/stores/projects'
 import { usePagesStore } from '@/stores/pages'
 import { mapActions, mapState } from 'pinia'
-import ImageTextBlockSettingsModalContent from '@/components/modals/content/ImageTextBlockSettingsModalContent.vue'
-import ImagesSliderBlock from './block-types/ImagesSliderBlock.vue'
 
 export default {
   components: {

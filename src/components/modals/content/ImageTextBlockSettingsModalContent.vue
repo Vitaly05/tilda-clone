@@ -2,7 +2,15 @@
   <div class="image-text-block-settings">
     <div class="modal__title">Настройка блока</div>
     <div class="modal__content">
-      <EditableText class="modal__edit-block-text-panel" :block="currentBlock" />
+      <div class="modal__edit-block-text-panel">
+        <div
+          class="page-block__editable-text"
+          contenteditable
+          @blur="currentBlock.text = $event.target.innerText"
+        >
+          {{ currentBlock?.text }}
+        </div>
+      </div>
       <RoundedButton
         class="image-text-block-settings__select-image-button"
         @click="openSelectImageModal"
@@ -11,7 +19,7 @@
       </RoundedButton>
     </div>
     <div class="modal__actions">
-      <RoundedButton @click="close"> Закрыть </RoundedButton>
+      <RoundedButton @click="saveChanges"> Сохранить </RoundedButton>
     </div>
   </div>
 </template>
@@ -44,18 +52,24 @@ export default {
   },
   watch: {
     selectedImageSrc(newSrc, oldSrc) {
-      this.updateImage(this.projectId, this.pageId, this.currentBlock.id, newSrc)
+      this.currentBlock.imageSrc = newSrc
     }
   },
   methods: {
     ...mapActions(useModalStore, ['close', 'open']),
-    ...mapActions(useBlocksStore, ['updateImage']),
+    ...mapActions(useBlocksStore, ['update']),
     openSelectImageModal() {
       this.open(ImageSelectorModalContent)
+    },
+    saveChanges() {
+      this.update(this.projectId, this.pageId, this.currentBlock.id, this.currentBlock)
+      this.close()
     }
   },
   mounted() {
-    this.currentBlock = this.getCurrentBlock(this.projectId, this.pageId)
+    this.currentBlock = JSON.parse(
+      JSON.stringify(this.getCurrentBlock(this.projectId, this.pageId))
+    )
   }
 }
 </script>

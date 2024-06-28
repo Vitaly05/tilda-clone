@@ -6,7 +6,7 @@
         <PageBlock v-for="block in getBlocks(projectId, pageId)" :key="block.id" :block="block" />
       </TransitionGroup>
     </div>
-    <RoundedButton class="page-editor__insert-block" @click="openBlockSideMenu">
+    <RoundedButton class="page-editor__insert-block" @click="openSideMenu">
       <IconAdd />
       Добавить запись
     </RoundedButton>
@@ -39,10 +39,7 @@ export default {
     ...mapState(useBlocksStore, ['getBlocks'])
   },
   methods: {
-    ...mapActions(useBlocksStore, ['add', 'openSideMenu']),
-    openBlockSideMenu() {
-      this.openSideMenu()
-    }
+    ...mapActions(useBlocksStore, ['add', 'openSideMenu'])
   }
 }
 </script>

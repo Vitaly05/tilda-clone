@@ -15,7 +15,7 @@
         <IconSettings />
         Настройки
       </TextButton>
-      <TextButton @click="() => remove(id, projectId)">
+      <TextButton @click="remove(id, projectId)">
         <IconTrash />
         Удалить
       </TextButton>

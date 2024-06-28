@@ -1,6 +1,6 @@
 <template>
   <div class="image-text-block">
-    <img class="image-text-block__image" :src="block?.imageSrc" />
+    <img v-show="block?.imageSrc" class="image-text-block__image" :src="block?.imageSrc" />
     <div v-if="readOnly" class="image-text-block__text">{{ block?.text }}</div>
     <EditableText v-else class="image-text-block__text" :block="block" />
   </div>

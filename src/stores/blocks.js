@@ -60,13 +60,13 @@ export const useBlocksStore = defineStore('blocks', {
       const currentBlocks = this.allBlocks[projectId][pageId]
       if (beforeBlockId === undefined) {
         currentBlocks.blocks.push({
-          ...JSON.parse(JSON.stringify(blockData)),
+          ...cloneObject(blockData),
           id: currentBlocks.nextIndex++
         })
       } else {
-        const index = currentBlocks.blocks.findIndex((block) => block.id === beforeBlockId)
+        const index = findBlockIndexById(currentBlocks.blocks, beforeBlockId)
         currentBlocks.blocks.splice(index + 1, 0, {
-          ...JSON.parse(JSON.stringify(blockData)),
+          ...cloneObject(blockData),
           id: currentBlocks.nextIndex++
         })
       }
@@ -74,63 +74,57 @@ export const useBlocksStore = defineStore('blocks', {
     },
     update(projectId, pageId, blockId, blockData) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
-      const currentBlockIndex = currentBlocks.findIndex((block) => block.id === blockId)
-      currentBlocks[currentBlockIndex] = JSON.parse(JSON.stringify(blockData))
+      const currentBlockIndex = findBlockIndexById(currentBlocks, blockId)
+      currentBlocks[currentBlockIndex] = cloneObject(blockData)
       saveBlocks(this.allBlocks)
     },
     updateText(projectId, pageId, blockId, newText) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
-      const currentBlockIndex = currentBlocks.findIndex((block) => block.id === blockId)
+      const currentBlockIndex = findBlockIndexById(currentBlocks, blockId)
       currentBlocks[currentBlockIndex].text = newText
       saveBlocks(this.allBlocks)
     },
     updateImage(projectId, pageId, blockId, newSrc) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
-      const currentBlockIndex = currentBlocks.findIndex((block) => block.id === blockId)
+      const currentBlockIndex = findBlockIndexById(currentBlocks, blockId)
       currentBlocks[currentBlockIndex].imageSrc = newSrc
       saveBlocks(this.allBlocks)
     },
     updateImageSlider(projectId, pageId, blockId, imageIndex, newSrc) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
-      const currentBlockIndex = currentBlocks.findIndex((block) => block.id === blockId)
+      const currentBlockIndex = findBlockIndexById(currentBlocks, blockId)
       currentBlocks[currentBlockIndex].slideImages[imageIndex].src = newSrc
       saveBlocks(this.allBlocks)
     },
     remove(projectId, pageId, blockId) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
-      const index = currentBlocks.findIndex((block) => block.id === blockId)
+      const index = findBlockIndexById(currentBlocks, blockId)
       currentBlocks.splice(index, 1)
       saveBlocks(this.allBlocks)
     },
     duplicate(projectId, pageId, blockId) {
       const currentBlocks = this.allBlocks[projectId][pageId]
-      const index = currentBlocks.blocks.findIndex((block) => block.id === blockId)
+      const index = findBlockIndexById(currentBlocks.blocks, blockId)
 
       currentBlocks.blocks.splice(index + 1, 0, {
-        ...JSON.parse(JSON.stringify(currentBlocks.blocks[index])),
+        ...cloneObject(currentBlocks.blocks[index]),
         id: currentBlocks.nextIndex++
       })
       saveBlocks(this.allBlocks)
     },
     moveUp(projectId, pageId, blockId) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
-      const index = currentBlocks.findIndex((block) => block.id === blockId)
+      const index = findBlockIndexById(currentBlocks, blockId)
       if (index > 0) {
-        ;[currentBlocks[index - 1], currentBlocks[index]] = [
-          currentBlocks[index],
-          currentBlocks[index - 1]
-        ]
+        replaceBlocks(currentBlocks, index - 1, index)
       }
       saveBlocks(this.allBlocks)
     },
     moveDown(projectId, pageId, blockId) {
       const currentBlocks = this.allBlocks[projectId][pageId].blocks
-      const index = currentBlocks.findIndex((block) => block.id === blockId)
+      const index = findBlockIndexById(currentBlocks, blockId)
       if (index < currentBlocks.length - 1) {
-        ;[currentBlocks[index + 1], currentBlocks[index]] = [
-          currentBlocks[index],
-          currentBlocks[index + 1]
-        ]
+        replaceBlocks(currentBlocks, index + 1, index)
       }
       saveBlocks(this.allBlocks)
     },
@@ -151,4 +145,16 @@ export const useBlocksStore = defineStore('blocks', {
 
 function saveBlocks(blocks) {
   setObject('allBlocks', blocks)
+}
+
+function cloneObject(obj) {
+  return JSON.parse(JSON.stringify(obj))
+}
+
+function replaceBlocks(blocks, index1, index2) {
+  ;[blocks[index1], blocks[index2]] = [blocks[index2], blocks[index1]]
+}
+
+function findBlockIndexById(blocks, blockId) {
+  return blocks.findIndex((block) => block.id === blockId)
 }

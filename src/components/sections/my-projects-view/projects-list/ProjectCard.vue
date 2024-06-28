@@ -2,15 +2,13 @@
   <button class="project-card" @click.self="goToProjectPage">
     <div class="project-card__title">{{ title }}</div>
     <div class="project-card__more-container">
-      <Dropdown :show="dropDownShow" @toggle="() => toggleDropDown(id)">
+      <Dropdown :show="dropDownShow" @toggle="toggleDropDown(id)">
         <div class="project-card__more-button">
           <IconMore />
         </div>
         <template #items>
-          <DropDownButtonItem @click="() => console.log('Rename')">
-            Переименовать
-          </DropDownButtonItem>
-          <DropDownButtonItem @click="() => remove(id)"> Удалить сайт </DropDownButtonItem>
+          <DropDownButtonItem @click="console.log('Rename')"> Переименовать </DropDownButtonItem>
+          <DropDownButtonItem @click="remove(id)"> Удалить сайт </DropDownButtonItem>
         </template>
       </Dropdown>
     </div>

@@ -20,7 +20,7 @@
             :key="url"
             :src="url"
             :class="{ 'image-selector__image--active': url === selectedSrc }"
-            @click="() => setImage(url)"
+            @click="setImage(url)"
           />
         </div>
         <div v-else class="image-selector__images-empty-text">Изображений не найдено</div>

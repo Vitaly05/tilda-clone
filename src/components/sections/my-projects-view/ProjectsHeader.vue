@@ -1,7 +1,7 @@
 <template>
   <div class="projects__header">
     <div class="projects__header-text">Мои сайты:</div>
-    <TextButton @click="() => add('My project')">
+    <TextButton @click="add('My project')">
       <IconAdd />
       Создать новый сайт
     </TextButton>

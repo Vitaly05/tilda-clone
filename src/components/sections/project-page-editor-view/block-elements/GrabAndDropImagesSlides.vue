@@ -12,7 +12,7 @@
       @dragover.prevent="onDragOver(index)"
       @dragleave="onDragLeave"
       @drop="onDrop(index)"
-      @click="() => $emit('click', index)"
+      @click="$emit('click', index)"
     />
   </swiper-slide>
 </template>

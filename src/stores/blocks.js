@@ -1,20 +1,6 @@
+import { defaultBlocks } from '@/data/defaultBlocks'
 import { getObject, setObject } from '@/helpers/localStorage'
 import { defineStore } from 'pinia'
-
-const defaultBlocks = {
-  1: {
-    1: {
-      nextIndex: 2,
-      blocks: [
-        {
-          id: 1,
-          type: 'text',
-          text: 'Default text'
-        }
-      ]
-    }
-  }
-}
 
 let storedBlocks = getObject('allBlocks')
 if (!storedBlocks) {

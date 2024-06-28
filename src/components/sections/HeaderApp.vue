@@ -30,7 +30,11 @@ export default {
   },
   computed: {
     headerClass() {
-      return { 'header--hidden': ['login', 'project-page-preview'].includes(this.$route.name) }
+      return {
+        'header--hidden': ['login', 'project-page-preview', 'project-page-editor'].includes(
+          this.$route.name
+        )
+      }
     }
   },
   methods: {
